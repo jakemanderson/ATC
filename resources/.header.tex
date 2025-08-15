@@ -1,0 +1,45 @@
+% Standard header for economics papers
+% Page layout
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+% AMS math packages
+\usepackage{amsmath, amssymb, amsthm}
+
+
+% Better looking tables
+\usepackage{booktabs}
+
+% For including graphics
+\usepackage{graphicx}
+
+% For citations
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+
+% For cross-referencing
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Research Paper},
+    pdfpagemode=FullScreen,
+}
+
+% For better looking lists
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+
+% For better looking captions
+\usepackage[font=small,labelfont=bf]{caption}
+
+% For better looking headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}

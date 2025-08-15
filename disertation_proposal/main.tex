@@ -1,0 +1,25 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{subfiles}
+
+% Let LaTeX search your resources folder
+\makeatletter
+\def\input@path{{../resources/}}
+\makeatother
+
+% Load common packages and commands
+\input{header_common.tex}
+
+% Document information
+\title{Dissertation Proposal}
+\author{Jake Anderson}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Include chapters (compile through main OR each chapter standalone)
+\subfile{../chapters/jail_phone_calls/jail_phone_calls.tex}
+\subfile{../chapters/peer_effects/peer_effects.tex}
+\subfile{../chapters/surveillance/surveillance.tex}
+
+\end{document}
