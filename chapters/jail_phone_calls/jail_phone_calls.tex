@@ -5,6 +5,12 @@
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{url}
+
+% Set up bibliography in APA style
+\bibliographystyle{apalike}  % APA-like style
 
 % Document information
 \title{Do Phone Calls Reduce Jail Time?}
@@ -14,14 +20,51 @@
 \begin{document}
 \maketitle
 
+
 \begin{abstract}
-Abstract here
+We study the causal impact of reducing phone call costs on pretrial detention durations in county jails. Leveraging recent policy changes in Iowa and Massachusetts that sharply lowered or eliminated the price of jail phone calls, we combine administrative jail roster data with an event study framework and a regression discontinuity in time design. We find that the policies reduced average jail spells by 7 to 10 days, with effects concentrated among individuals detained for low-level offenses. Back-of-the-envelope calculations suggest that the social benefits—including taxpayer savings and reduced liberty costs—substantially exceed the forgone revenue from phone call charges. Our findings highlight how frictions in communication access during incarceration can extend detention and generate downstream criminal justice costs.
 \end{abstract}
 
 \newpage
 \section{Introduction}
 
 
-% Your content here
+Frictions in any administrative or bureaucratic environment are unavoidable, but when they are significant, it is important to understand how they affect the people processed by that institution. 
+
+There are many factors which are important to determining the proper handling of an individual who has committed a crime. Contrition, harm, likelihood of committing another offense, and the law are all important inputs. It is well established that ability to pay is also an important input--whether this should or should not be the case is a big debate in the advocacy space. Measures have been taken to attempt to eliminate disparities caused by differences in bail amounts and willingness to pay. 
+
+The ability to afford bail, legal counsel, and the time cost to achieve the best legal outcome and minimize time in jail and marks on a criminal record is not the only way that differences in wealth enter the sentencing function. 
+
+Newly incarcerated or jailed individuals differ in their knowledge of the resources available to them, and also differ in when and if those resources are known to them. Navigating the justice system as a first time offender in particular is perilous and inefficient. 
+
+The first time being in jail is a harrowing and frightening experience. Most individuals who are booked into county jail are not aware of the process, of their rights, and are experiencing a very unusual set of events that lead them to that jail. 
+
+Individuals in crisis are less likely to make optimal decisions, even if they are fully aware of the rules of the game and generally play the game well. 
+
+In other crises, individuals have options to obtain support through outsourcing their needs to external parties--their spouse, family members, lawyer, or other support system. 
+
+The United States criminal justice system is not unique in its harshness but it is specialized in the level of cruelty it will employ to enforce obedience. Officers have high levels of discretion in whether an individual will be permitted to write down phone numbers from their cell phone, take money from their wallet in the jail-provided locker containing their personal effects, and when they will even be permitted to make the phone call they are entitled to (varying by state), if they are entitled to one at all. 
+
+This friction and extrajudicial punitive measures may be correlated with the important inputs to sentencing, but they may also be correlated to factors which should not be relevant to the sentencing function--officer disposition, time of day, administrative support, type of offense, and jail level prices of phone calls. 
+
+Phone calls are the most important resource for individuals who are booked into jail. It is a lifeline which connects them to a support system and most importantly, allows them to connect to their family, lawyer, and job. Connecting with family to receive emotional reassurance and financial support is important as many goods and services in carceral facilities require setup and account balance top ups in order to utilize basic functionality, and if bail is an available option, time in jail pre-trial can be reduced significantly. Connecting with a lawyer directly or through family is the most important step to being released, as most people are unfamiliar with the legal system, how to proceed in various legal circumstances, and there are often grave consequences for taking the wrong steps in legal environments. As for employment, a large fraction of jobs in the US will terminate after a single ``no call no show", and so the ability to notify important parties of an incarcerated individual's unavailable status is important for labor market attachment. 
+
+How long would it take for someone to notice you are gone? When someone is booked into jail, it's often the case that nobody knows where they are.
+
+Something as simple as a phone call or notification of being booked into jail is not as simple as it seems. There are many barriers to access, and conditional on access, affordability. In order to obtain access, one needs permission to make the phone call, that the collect call receipt is covered by the carrier (often requiring special settings and default to ``no" in many phone plans), congestion and triage, account creation or telecommunications service sign up, and access to money and personal affects to obtain the number and the money to make the call. 
+
+Conditional on access, while a phone call can be important for those in jail, it may be the case that they simply do not have the funds--on their person or in general--to make the call. Phone calls from jail are part of an exploitative regime of extraction from incarcerated individuals where predatory pricing and markups transfer large sums
+
+\section{Literature Review}
+
+Most existing research on phone calls in jail has focused on the impact of phone calls and family contact on individuals in prison. See discussion \href{https://www.prisonpolicy.org/blog/2021/12/21/family_contact/}{here}. As early as 1972, the California Department of Corrections issued a report \citep{HoltMiller1972} which found that incarcerated individuals who were not visited were six times more likely to recidivate than those who had at least three visitors. A similar study in Hawaii also found that connection to home community was associated with better outcomes \citep{AdamsFischer1976}. Ohlin's earlier work sought to look at predictive factors of parole success \citep{ohlin_selection_1951}. In Florida, only 42\% of inmates received any visits in their final year of incarceration. They found that reduced recidivism was strongly associated with a visitation close to the release date, and that ``each additional visit received during incarceration lowered the odds of two-year recidivism by 3.8 percent'' \citep{BalesMears2008}. Results discussed \href{https://www.prisonpolicy.org/blog/2018/01/30/knox_report/}{here}.
+
+Turning to the specific effect of phone calls, a 2020 study evaluating the Arizona Prison Visitation Project found that phone calls are important for relationship quakity \citep{haverkate_differential_2020}. When video calls were introduced, providers often demand that in person visits be discontinued in order to recoup the cost of the infrastructure. Concerns about contraband are often raised, but investigations have found that it's the staff, not the incarcerated individuals, who are bringing contraband into the facility. Jails and prisons receive financial incentives for implementing technology which is paid for out of the pockets of the loved ones of incarcerated individuals. Technology can reduce the number of officers who are necessary to monitor the in person visits, and also increase the kick backs the jails and prisons receive from the providers of the technology, as well as increasing utilization (and normalization) of such policies, benefitting the private providers of the technology.
+
+
+
+
+\newpage
+\bibliography{/Users/jakeanderson/Documents/research/ATC/resources/references}
 
 \end{document}
