@@ -1,7 +1,175 @@
-\documentclass[../../disertation_proposal/main.tex]{subfiles}
-\begin{document}
+\documentclass[12pt, a4paper]{article}
 
-\chapter{Peer Effects}
-\label{ch:peer_effects}
+% Load essential packages
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{url}
+
+% Set up bibliography in APA style
+\bibliographystyle{apalike}  % APA-like style
+
+% Document information
+\title{Peer Effects and Criminal Capital Transmission: Evidence from Cell-Level Incarceration Data}
+\author{Jake Anderson}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+    This project examines peer effects in carceral settings using detailed cell-level administrative data from a large sample of incarceration facilities. While prior work has documented peer effects within correctional institutions, most studies rely on facility-level exposure measures that may mask critical within-facility heterogeneity. By leveraging fine-grained data on cell assignments and movements over time, we provide new evidence on the role of proximate peer exposure in shaping recidivism outcomes. My design builds on the empirical strategy of Bayer, Hjalmarsson, and Pozen (2009), extending it with more precise measures of co-residence and contact intensity. It also improves on existing exposure metrics, by tracking the spatial and temporal granularity of peer interactions within facilities.
+\end{abstract}
+
+\newpage
+\section{Introduction}
+
+Correctional facilities are not merely sites of punishment and containment—they are also dense social environments where incarcerated individuals are routinely exposed to one another under conditions of close physical proximity, limited autonomy, and heightened stress. Within these settings, inmates form temporary but intense social networks that can transmit norms, behaviors, and forms of knowledge. This raises a fundamental and policy-relevant question: to what extent do peers influence future criminal behavior through their interactions behind bars?
+
+While peer effects have long been studied in educational and neighborhood contexts, their role within the criminal justice system remains comparatively underexplored. Yet, the stakes in correctional settings are arguably higher. Jails and prisons may serve as mechanisms of deterrence and rehabilitation, but they may also operate as “schools of crime,” in which individuals acquire criminal capital through their interactions with more experienced or more motivated peers. Understanding how peer exposure during incarceration shapes future outcomes—particularly recidivism—is crucial for designing correctional policies that mitigate harm rather than amplify it.
+
+\sloppy
+This paper investigates peer effects within a large urban jail system, leveraging uniquely detailed administrative data on daily cell assignments, coupled with statewide longitudinal criminal justice records. Specifically, I focus on the Dallas County Jail system, which houses over 6,500 individuals on a typical day and maintains internal housing records that identify each inmate's tower, block, and cell. This fine-grained spatial and temporal information allows for a much more precise mapping of peer exposure than prior studies, which typically rely on coresidence at the facility level. By linking these jail records to comprehensive preand post incarceration criminal histories from the Texas Department of Public Safety, I am able to trace how peer exposure at different levels of proximity influences subsequent criminal behavior.
+
+The empirical strategy builds on and extends the framework of \citet{bayer2009building}, who examine peer effects among juvenile offenders in Florida correctional institutions. Their identification strategy exploits the staggered nature of facility admissions and releases to measure exposure to peers with specific criminal histories. While Bayer et al. show that youth are more likely to reoffend in offense categories they shared with their peers, they are limited to facility-level exposure measures. The present study introduces a higher-resolution empirical design by constructing exposure metrics at the level of the cell, block, and tower, observed daily throughout an individual's incarceration spell. This enables me to distinguish between brief, indirect exposure and sustained, high-intensity contact—providing a richer understanding of how peer influence operates within the confines of a correctional environment.
+
+This setting also addresses a major empirical challenge in the peer effects literature: the endogeneity of group formation. In many social contexts, individuals choose their peers, making it difficult to disentangle selection from influence. In contrast, assignment to jail cells is typically driven by administrative routines, such as bed availability, classification scores, or floor capacity, rather than by inmates' personal characteristics. Conditional on rich covariates and fixed effects for block and offense type, peer exposure within a cell is plausibly exogenous to unobserved determinants of post-release outcomes. This allows for a credible identification of causal peer effects, including offense-specific interactions and potential mechanisms of criminal capital transmission.
+
+The analysis proceeds in several steps. First, I construct individual-level measures of exposure to peers with histories in specific crime categories, weighted by the duration of co-residence. These exposure measures are computed at multiple levels of aggregation—cell, block, and tower—allowing me to test how the spatial intensity of contact influences outcomes. Second, I estimate models of recidivism by offense type using a framework that allows for heterogeneous effects by the individual's own criminal history. Third, I explore the robustness of these estimates to various identification threats, including time trends, facility-level sorting, and censoring due to incomplete observation windows.
+
+My findings contribute to three key literatures. First, I extend the empirical literature on peer effects by demonstrating that more precise measurement of peer exposure—at the level of daily cell assignments—yields significant improvements in causal identification. Second, I contribute to the criminology literature by documenting the mechanisms through which carceral environments shape future criminal behavior. Third, this study informs policy debates around correctional assignment practices, suggesting that exposure to certain peer profiles may reinforce existing criminal trajectories or, conversely, dampen risk of reoffending.
+
+Ultimately, this paper offers new insight into how incarceration functions not just as an individual sanction, but as a social experience with lasting implications. By uncovering the structure and consequences of peer interactions behind bars, it offers a deeper understanding of how criminal capital is formed, transmitted, and potentially disrupted within the carceral state.
+
+
+\section{Literature Review}
+
+\subsection{Theoretical Foundations of Peer Effects}
+
+The study of peer effects—how an individual's behavior is shaped by the behaviors or characteristics of their social group—has long been a central topic in economics, sociology, and psychology. At its core, the peer effects literature seeks to identify how individual outcomes are influenced by the presence, actions, or attributes of others in a shared environment. This inquiry becomes particularly relevant in institutional settings where individuals are involuntarily grouped, such as schools, military units, or carceral facilities.
+
+A foundational distinction in the economics literature, first articulated by \citet{manski1993identification}, separates \textit{endogenous}, \textit{contextual}, and \textit{correlated} peer effects. Endogenous effects arise when an individual’s outcome depends on the outcomes of peers. Contextual effects occur when the characteristics (rather than the outcomes) of peers influence an individual’s behavior. Correlated effects, by contrast, reflect shared environmental or institutional factors that affect all individuals similarly, making them observationally similar even in the absence of interaction.
+
+The empirical challenge lies in isolating causal peer effects from these confounding correlated influences. This difficulty is often referred to as the ``reflection problem''—a term coined by \citet{manski1993identification}—which highlights the simultaneity inherent in peer interactions: if peers influence each other mutually, disentangling who affects whom becomes analytically fraught. Additionally, peer groups are often not randomly assigned, making selection bias another major obstacle to causal inference.
+
+Several influential studies have sought to address these challenges through natural or designed experiments. For example, \citet{sacerdote2001peer} exploits the random assignment of college roommates to estimate peer effects in academic performance, while \citet{katz2001moving} use randomized housing vouchers in the Moving to Opportunity (MTO) program to estimate the effect of neighborhood peers. These designs offer strong internal validity, but their generalizability to high-stakes institutional environments—like prisons—remains limited.
+
+In contrast to voluntary social environments, institutional settings such as jails and prisons provide more plausibly exogenous variation in peer exposure. Here, individuals are often assigned to housing units or cells based on logistical or administrative criteria rather than personal choice. This opens the door to credible identification strategies for estimating peer effects, provided that assignment rules are sufficiently orthogonal to unobserved determinants of future behavior.
+
+Moreover, the literature has begun to move beyond binary notions of exposure, incorporating more nuanced measures of social proximity and contact intensity. This methodological evolution is critical for understanding how peer effects operate within densely interactive institutional environments. The subsequent sections focus specifically on peer influence within the criminal justice system and highlight how different studies—including the present one—operationalize and identify peer exposure within carceral facilities.
+
+\subsection{Peer Effects in Criminal and Institutional Settings}
+
+While peer effects have been extensively studied in educational and residential settings, relatively fewer studies explore peer dynamics within criminal justice institutions. Yet, carceral environments offer particularly high-stakes contexts for peer influence, given the intensity of contact, lack of autonomy, and long-term consequences of behavior behind bars. Moreover, incarceration often serves as a critical juncture in criminal trajectories, making it a key setting for understanding the transmission of criminal capital.
+
+One of the seminal contributions in this space is by \citet{bayer2009building}, who study peer effects among over 8,000 juvenile offenders in Florida correctional facilities. Their identification strategy exploits quasi-random variation in peer composition due to staggered inmate admissions and releases within facilities. By conditioning on facility and facility-by-offense fixed effects, they isolate the influence of peers’ criminal histories on an individual’s probability of reoffending in specific crime categories. The authors find strong evidence of \textit{reinforcing} peer effects: youths are more likely to recidivate in a given offense type if they were previously involved in that offense and were exposed to peers with similar histories. However, they find no evidence of \textit{introductory} effects—exposure alone does not appear to encourage branching into new crime types.
+
+Building on this framework, \citet{damm2020prison} analyze adult inmates in Danish prisons, using daily exposure measures to estimate the time-weighted share of peers with histories in specific crime types. Their study focuses on first-time inmates under the age of 26 and constructs peer exposure at the facility level, leveraging administrative records from 42 institutions. Like Bayer et al., they find reinforcing peer effects, particularly in crimes requiring higher levels of planning or group coordination, such as vandalism, arson, and drug-related offenses. However, their results also show a novel pattern: exposure to peers with violent criminal histories may have a \textit{deterrent} effect, a finding absent in earlier studies. Overall, the magnitude of peer effects in the Danish context appears more muted than in Bayer et al., suggesting institutional or demographic differences may moderate these dynamics.
+
+These studies provide compelling evidence that correctional environments function as sites of criminal capital transmission, particularly along offense-specific lines. However, both face notable limitations in the granularity of peer exposure measures. Bayer et al. define exposure at the facility level and rely on co-residence timing, while Damm and Gorinas improve temporal precision but still aggregate peer characteristics at the facility level. Neither study can directly observe interpersonal proximity at the level of cells, housing units, or daily contact patterns.
+
+The present study builds on these contributions by leveraging high-frequency, cell-level assignment data from a large urban jail system. This enables the construction of peer exposure metrics with far greater spatial and temporal resolution, allowing for the identification of both intensive and extensive margins of peer contact. Additionally, by linking individuals to comprehensive pre- and post-incarceration records across the state of Texas, the study can track longer-run outcomes than those observed in prior work, offering a fuller picture of how peer interactions shape criminal trajectories.
+
+\subsection{Mechanisms and Long-Term Outcomes}
+
+Understanding the mechanisms behind peer effects in incarceration settings is essential for interpreting their impact and for designing effective policy responses. A central concept in the criminological literature is that of ``criminal capital''—skills, knowledge, and norms that facilitate engagement in illicit behavior. Correctional institutions may serve not only as holding facilities but also as environments where such capital is transmitted, reinforced, or, in some cases, deterred.
+
+\citet{stevenson2017breaking} provides a detailed account of the mechanisms through which social influence operates in juvenile detention. Drawing from ethnographic insights and administrative data, she documents how peer networks shape behavior both within institutions and upon release. Social learning, reputational incentives, and access to criminal opportunities are identified as key drivers of behavioral change. In line with prior work, she finds that peers primarily reinforce existing tendencies rather than introducing new types of delinquency. Her work also highlights the broader economic and social costs of youth incarceration, emphasizing that peer interactions can entrench disadvantage and limit opportunities for rehabilitation.
+
+These findings align with classic criminological theories that stress the importance of differential association and social learning in shaping criminal behavior. \citet{glueck1950unraveling} and \citet{warr1991breaking}, for example, emphasize that delinquency is often embedded in peer relationships, particularly during formative developmental stages. More recent work by \citet{glaeser1996crime} models criminal behavior as a social multiplier, where individuals’ decisions depend on the perceived prevalence and payoff of crime within their networks. These perspectives suggest that the effects of incarceration may extend well beyond the period of confinement, as individuals internalize and carry forward the social norms and behaviors they are exposed to.
+
+While much of the empirical literature on peer effects focuses on short-run recidivism, the potential for long-term consequences is substantial. Exposure to criminal peers may affect not only whether an individual reoffends, but also the severity, timing, and nature of subsequent offenses. It may also influence reentry outcomes such as employment, housing stability, or compliance with supervision requirements. Because incarceration typically disrupts existing social and economic ties, peer influence during this period may play an outsized role in shaping future trajectories.
+
+The current study leverages a comprehensive longitudinal dataset that links jail incarceration records with pre- and post-release criminal justice data across Texas. This allows for the estimation of peer effects on a broad array of post-incarceration outcomes, moving beyond recidivism to examine the cumulative effects of criminal capital transmission. In doing so, it contributes to a growing literature on how incarceration interacts with social structures to shape long-term life outcomes.
+
+\subsection{Methodological Innovations in Measuring Exposure}
+
+A central challenge in the peer effects literature is how to define and measure peer exposure in a way that meaningfully captures interaction intensity and is plausibly exogenous to potential outcomes. This challenge is particularly salient in institutional environments like prisons and jails, where administrative data often only provide coarse information on individual location and movement. Consequently, many studies rely on facility-level assignment or aggregate peer characteristics, which may mask substantial within-facility heterogeneity.
+
+In their foundational study, \citep{bayer2009building} define peer exposure based on contemporaneous co-residence within the same correctional facility. They construct crime-specific peer variables by averaging the prior offense types of peers who overlap in time, exploiting the quasi-random timing of inmate entry and release. While this approach introduces valuable variation, it assumes that all peers within a facility have equal opportunity for influence, which is unlikely to hold in practice given housing units, cell assignments, and other institutional structures that mediate interaction.
+
+\citep{damm2020prison} advance the measurement of exposure by calculating a time-weighted average of peers' offense histories within the same facility. Their metric accounts for daily variation in peer composition and emphasizes duration-adjusted exposure to peers with specific criminal backgrounds. However, like Bayer et al., their exposure definition is still aggregated at the facility level, and the underlying data do not record cell or section-level assignments. As a result, even relatively infrequent or indirect peer interactions may be weighted equally with close, sustained contact.
+
+The current study addresses these limitations by leveraging highly granular administrative data from a large urban jail system. This dataset includes detailed information on individual cell assignments, enabling the construction of exposure metrics that reflect direct physical proximity and likely interpersonal contact. By observing daily cell-level housing, we can compute exposure measures at varying levels of intensity—from immediate cellmates to broader unit-level peers—across time. This allows for fine-grained distinctions between brief and sustained exposures, one-on-one versus group-level influence, and varying peer characteristics (e.g., age, criminal history, prior institutional behavior).
+
+Moreover, by linking these jail records to comprehensive statewide data on pre-incarceration histories and post-release outcomes, we can explore how peer exposure interacts with prior behavior and shapes future trajectories. This two-source design enables a dynamic view of exposure and outcomes that evolves over time and across institutional contexts. Finally, our empirical strategy explicitly addresses identification concerns by exploiting plausibly exogenous variation in cell assignments, supplemented with fixed effects and rich covariate controls to address selection.
+
+Taken together, this design represents a methodological advance in the measurement of peer effects in institutional settings, offering greater precision, improved identification, and broader outcome scope than existing studies.
+
+\section{Data}
+
+\subsection{Jail Data Initiative (JDI)}
+
+The primary source of jail-level data used in this study comes from the Jail Data Initiative (JDI), a collaborative project led by the Social Science Research Council and the NYU Public Safety Lab. The JDI is an ambitious effort to systematically collect and standardize individual-level jail records from over 1,300 counties across the United States. This data infrastructure enables researchers to investigate patterns of incarceration, pretrial detention, and release at an unprecedented level of temporal and geographic granularity.
+
+The JDI compiles \textit{daily person-level jail roster data}, which are converted into booking-level records. Each booking record includes fields such as the individual's name, age, gender, race or ethnicity, booking charges, booking and release dates, and rebooking indicators. In jurisdictions where it is available, the JDI also collects additional data on bail and bond amounts, allowing researchers to analyze the use and impact of pretrial detention mechanisms. This richness of information makes the JDI one of the most detailed public datasets on local incarceration in the United States.
+
+In addition to offering public-facing facility-level summaries through an online dashboard, the JDI also maintains a restricted-access database that includes full individual-level records. Access to this restricted database is granted on a case-by-case basis for approved research purposes. The present study uses restricted JDI data for Dallas County, Texas, which operates one of the largest county jail systems in the country, with a daily population exceeding 6,500 individuals. Importantly, the Dallas County records include detailed housing assignment information at the cell level, updated daily. This level of spatial and temporal detail is critical for constructing high-resolution measures of peer exposure during incarceration.
+
+The JDI dataset thus serves as the backbone for the within-jail analysis conducted in this paper. Its breadth and depth allow for the tracking of inmate movements, exposure durations, and facility-level trends, providing the empirical foundation for identifying peer effects at a fine spatial scale.
+
+\subsection{Texas Department of Public Safety Data}
+
+To examine the long-run consequences of jail-based peer exposure, this study integrates individual-level incarceration records from the Jail Data Initiative with longitudinal criminal justice data from the Texas Department of Public Safety (DPS). Specifically, we utilize the Texas Computerized Criminal History (CCH) system, a statewide administrative database that records the full lifecycle of criminal cases, including arrests, charges, court dispositions, sentences, custody movements, and reentry events.
+
+The CCH system contains multiple linked tables that track individuals from arrest through adjudication and post-conviction outcomes. Key components include the \texttt{TRN} and \texttt{TRS} tables (tracking incidents and sequences), the \texttt{OFFENSE} and \texttt{PROSECUTION} tables (describing charges and prosecutorial decisions), and the \texttt{CUSTODY} table (documenting periods of incarceration and agency transfers). Each record is uniquely indexed using identifiers such as \texttt{PER\_IDN} (individual), \texttt{TRN\_IDN} (tracking number), and \texttt{TRS\_IDN} (sequence number), enabling comprehensive linkage across system components.
+
+Importantly, the CCH data enable the construction of dynamic criminal trajectories, including reoffending rates, offense types, sentencing patterns, and transitions between supervision statuses. The dataset captures both felony and misdemeanor-level offenses, and includes metadata on court outcomes (e.g., conviction, acquittal, deferred adjudication), sentence details (e.g., confinement length, probation duration), and subsequent re-incarceration events. Additionally, for many individuals, demographic variables such as age, gender, race, and ethnicity are available through the \texttt{PERSON} and \texttt{NAME} tables.
+
+This rich administrative infrastructure allows for the measurement of post-release outcomes at high frequency and across multiple dimensions. When linked to the JDI jail records, the CCH data enable a longitudinal analysis of how carceral peer exposure influences recidivism, offense specialization, and the intensity of future criminal activity. Moreover, the statewide coverage of the CCH ensures that criminal justice involvement outside the focal county (Dallas) is still observable, reducing outcome misclassification and attrition.
+
+The combined dataset thus offers a uniquely powerful platform for studying the downstream consequences of incarceration environments, bridging within-jail exposure dynamics with post-release criminal trajectories.
+
+\section{Internal Layout of the Dallas County Jail}
+
+The Dallas County Jail system is composed of three primary facilities: the North Tower, the West Tower, and Kays Tower. Each tower contains a network of cell blocks and housing units that vary in structure and designation. The North Tower is the largest facility, comprising multiple floors with cell blocks typically labeled using an alphanumeric convention such as \texttt{3e04} or \texttt{6w08}, where the numeral indicates the floor and the letter indicates the wing (e.g., east or west). Within each block, there are multiple cells, generally numbered from 01 through at least 10, suggesting a minimum of ten cells per block, though some blocks appear to extend further. The West Tower follows a similar structure but includes both traditional cell blocks (e.g., \texttt{4e08}) and pod-based housing units labeled as \texttt{09p 05}, indicating a dormitory-style configuration with pods serving as the primary housing unit.
+
+Kays Tower, by contrast, uses a distinct format for its cell blocks. Designations such as \texttt{Kt 03-d} or \texttt{Kt 01-g} suggest that each floor (numbered 01 through at least 04) is divided into smaller units labeled A through I, with each letter likely corresponding to a separate cell cluster or wing. Across these towers, individuals are housed in cells or pods that can be precisely identified by these structured codes. This internal configuration allows for granular mapping of inmate co-location over time. In total, the dataset reflects dozens of unique blocks across the three towers, each with multiple cells, enabling a detailed construction of peer exposure networks within the jail.
+
+Notably, there is substantial heterogeneity in the density and structure of housing assignments. Some cells, particularly those labeled with standard alphanumeric codes (e.g., \texttt{2wu09} or \texttt{2wu17}), house small groups of two or three individuals, often sharing confined quarters. In contrast, units such as \texttt{08p} appear to function as large dormitory-style pods, with upwards of 60 individuals assigned across internal sub-units such as \texttt{08p 03}, \texttt{08p 11}, or \texttt{08p 14}. These pods are likely to have open layouts with shared common areas, suggesting a qualitatively different type of peer exposure than in closed cells. Additionally, certain location codes such as \texttt{Keith} do not follow the tower-based schema and may correspond to temporary holding areas, medical units, or other nonstandard housing arrangements. These differences in unit structure are critical for our analysis, as they imply varying degrees of physical proximity, interaction frequency, and social density, all of which may shape the mechanisms and intensity of peer effects.
+\section{Empirical Specification}
+
+The empirical strategy follows and extends the framework developed by \citet{bayer2009building}, which estimates crime-specific peer effects by exploiting quasi-random assignment to shared housing in juvenile correctional facilities. In contrast to their facility-level exposure design, my analysis leverages detailed administrative data from the Dallas County Jail, enabling the construction of peer exposure measures at the granularity of tower, block, and cell, observed daily throughout each individual's incarceration spell. This level of precision allows for a more accurate and behaviorally relevant mapping of social exposure behind bars.
+
+The primary specification relates post-release recidivism outcomes to vectors of individual and peer characteristics, incorporating time and space fixed effects to address unobserved heterogeneity. Formally, the estimating equation is:
+
+\begin{align}
+    R_{ibt}^{h} =\ & \beta_{0} \left( \text{Offense}_{ibt}^{h} \times \text{PeerOffense}_{ibt}^{h} \right) \nonumber \\
+    & + \beta_{1} \left( \text{NoOffense}_{ibt}^{h} \times \text{PeerOffense}_{ibt}^{h} \right) \nonumber \\
+    & + P_{ibt} \alpha + X_{ibt} \gamma + \lambda_{b} + \text{Offense}_{ibt}^{h} \times \mu_{b} + \eta_{t} + \varepsilon_{ibt}^{h}
+    \end{align}
+    
+
+The dependent variable $R_{ibt}^{h}$ is an indicator for whether individual $i$, released from block $b$ in time period $t$, recidivates with offense type $h$. The term $\text{PeerOffense}_{ibt}^{h}$ represents the extent of $i$’s exposure to peers with a prior history of offense $h$ during incarceration, measured at the cell-level and aggregated across all co-residence episodes. This exposure measure accounts for both who is housed together and for how long, yielding a duration-weighted average of peer histories. The term $\text{Offense}_{ibt}^{h}$ indicates whether individual $i$ had any prior convictions for offense $h$ at booking, while $\text{NoOffense}_{ibt}^{h}$ captures those without such a history. The interaction terms allow peer effects to differ between individuals with and without prior experience in offense $h$.
+
+The vectors $P_{ibt}$ and $X_{ibt}$ include, respectively, peer and individual covariates. These include demographic variables (age, gender, race), criminal history (prior charges in other crime categories), bond status, and jail length-of-stay. Peer characteristics are computed as weighted averages of the characteristics of all individuals with whom $i$ shared a cell, weighted by number of overlapping days.
+
+A key innovation in this setting is the inclusion of block-level and block-by-offense fixed effects, denoted by $\lambda_{b}$ and $\mu_{b}$, which absorb all time-invariant characteristics of each block, including tower infrastructure, classification norms, and staffing patterns. These fixed effects ensure that identification comes solely from within-block variation in peer exposure, ruling out bias from non-random assignment to particular jail environments. Time effects $\eta_t$ are defined at the week or quarter level and absorb aggregate trends in criminal activity or policy shifts affecting rearrest probabilities.
+
+Identification relies on the institutional reality that jail housing is governed by logistical and operational constraints—such as bed availability, classification scores, and movement schedules—rather than deliberate matching based on peer attributes. Conditional on observables and fixed effects, peer assignment within a block is plausibly as good as random. As with \citet{bayer2009building}, peer measures may be subject to measurement error due to censoring at the edges of the observation window, but this error is orthogonal to individual characteristics and should attenuate coefficients toward zero.
+
+Estimation proceeds using seemingly unrelated regression (SUR), where separate regressions are estimated for each offense category to allow for cross-equation error correlation. Standard errors are clustered at the block level to account for shared exposure environments and correlated unobservables. I test robustness to alternative clustering levels (e.g., tower or cell) and conduct placebo tests to ensure that observed peer effects are not artifacts of compositional changes or unobserved trends.
+
+\section{Results}
+
+No results yet.
+
+\section{Next Steps}
+
+I have successfully matched individuals with a high rate of accuracy from the Jail Data Initiative(JDI) records to the Texas Department of Public Safety(DPS) records. The next steps are:
+\begin{enumerate}
+    \item Construct the criminal histories
+    \item Construct the peer exposure measures
+    \item Estimate the model 
+    \item Check to see what other jails in Texas I have cell level data for
+\end{enumerate}
+
+
+\newpage
+\bibliography{/Users/jakeanderson/Documents/research/ATC/resources/references}
 
 \end{document}

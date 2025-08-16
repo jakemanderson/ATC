@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: jail_phone_calls.aux
+The style file: apalike.bst
+Database file #1: /Users/jakeanderson/Documents/research/ATC/resources/references.bib
+You've used 25 entries,
+            1935 wiz_defined-function locations,
+            661 strings with 7883 characters,
+and the built_in function-call counts, 9693 in all, are:
+= -- 986
+> -- 321
+< -- 20
++ -- 116
+- -- 102
+* -- 859
+:= -- 1679
+add.period$ -- 77
+call.type$ -- 25
+change.case$ -- 174
+chr.to.int$ -- 25
+cite$ -- 25
+duplicate$ -- 346
+empty$ -- 711
+format.name$ -- 145
+if$ -- 1869
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 25
+newline$ -- 129
+num.names$ -- 75
+pop$ -- 114
+preamble$ -- 1
+purify$ -- 176
+quote$ -- 0
+skip$ -- 263
+stack$ -- 0
+substring$ -- 833
+swap$ -- 25
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 146
+warning$ -- 0
+while$ -- 92
+width$ -- 0
+write$ -- 331
